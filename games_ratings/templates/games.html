@@ -1,0 +1,42 @@
+{% extends 'master_games_rating.html' %}
+
+{% block content %}
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <form method="POST" action="">
+        {% csrf_token %}
+        <div class="row">
+            <div style="margin-bottom: 4rem;" class="col-md-12">
+                <div class="col-md-4">
+
+                </div>
+                <button type="submit" class="col-md-4 btn btn-primary">SUBMIT RATINGS</button>
+            </div>
+            {% for game in all_games %}
+            <!-- Page Heading -->
+            <div class="col-md-4">
+                <div class="card" style="width: 50rem;">
+                    <img style="width: 50rem; height: 35rem;" class="card-img-top" src="{{game.image}}"
+                        alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title"> {{game.name}} {{game.rating}} </h5>
+                        {% if game.rating > 0 %}
+                        <input id="rating-system" name="{{game.id}}" disabled type="number" value="{{game.rating}}"
+                            class="rating" min="1" max="5" step="1">
+                        {% else %}
+                        <input id="rating-system" name="{{game.id}}" type="number" value="" class="rating" min="1"
+                            max="5" step="1">
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+        </div>
+    </form>
+</div>
+<!-- /.container-fluid -->
+
+
+{% endblock %}
